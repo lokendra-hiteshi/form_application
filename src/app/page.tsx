@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
-import dynamic from "next/dynamic";
 
 const steps = [
   "Personal Information",
@@ -12,10 +11,6 @@ const steps = [
   "Family Details",
   "Upload Documents",
 ];
-
-const ExampleComponentNoSSR = dynamic(() => import("../components/noSSR"), {
-  ssr: false,
-});
 
 const InterviewApplicationForm: React.FC = () => {
   const [step, setStep] = useState(1);
