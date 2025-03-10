@@ -692,16 +692,6 @@ const InterviewApplicationForm: React.FC = () => {
                   accept="audio/mp3, video/mp4"
                   onChange={(e) => handleFileChange("profileImage", e)}
                 />
-                {formData.profileImage && (
-                  <div className="w-full text-center mt-2">
-                    <Image
-                      src={URL.createObjectURL(formData.profileImage)}
-                      alt="Profile Preview"
-                      className="w-24 h-24 object-cover rounded-full mx-auto"
-                    />
-                    <p className="text-xs mt-1">Profile Image Preview</p>
-                  </div>
-                )}
               </div>
 
               {/* Resume Upload and Preview */}
