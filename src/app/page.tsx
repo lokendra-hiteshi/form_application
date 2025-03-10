@@ -21,6 +21,8 @@ const steps = [
 const InterviewApplicationForm: React.FC = () => {
   const [step, setStep] = useState(1);
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [filePreview, setFilePreview] = useState<string | null>(null);
+  const [fileType, setFileType] = useState<"audio" | "video" | null>(null);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -77,7 +79,21 @@ const InterviewApplicationForm: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = e.target.files?.[0] || null;
-    setFormData((prev) => ({ ...prev, [name]: file }));
+    if (file) {
+      if (file.type === "audio/mp3") {
+        setFileType("audio");
+      } else if (file.type === "video/mp4") {
+        setFileType("video");
+      } else {
+        alert("Invalid file type. Please upload a .mp3 or .mp4 file.");
+        return;
+      }
+
+      setFormData((prev) => ({ ...prev, [name]: file }));
+
+      const fileUrl = URL.createObjectURL(file);
+      setFilePreview(fileUrl);
+    }
   };
 
   const nextStep = () => setStep((prev) => prev + 1);
@@ -120,7 +136,7 @@ const InterviewApplicationForm: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col justify-start pt-20 items-center bg-gradient-to-r from-purple-600 to-blue-500 min-h-screen">
+    <div className="flex flex-col justify-start pt-20 items-center bg-[url(/6114100.jpg)] bg-cover min-h-screen">
       <h2 className="text-3xl font-bold text-white text-center mb-20">
         Detail Form
       </h2>
@@ -141,12 +157,12 @@ const InterviewApplicationForm: React.FC = () => {
           ))}
         </div>
 
-        <div className="bg-white bg-opacity-20 backdrop-blur-lg   p-10 rounded-lg shadow-lg w-full">
+        <div className="bg-white bg-opacity-10 backdrop-blur-lg   p-10 rounded-lg shadow-lg w-full">
           {step === 1 && (
             <div>
               <label
                 htmlFor="fullName"
-                className="block text-sm font-medium mb-1"
+                className="block text-white text-sm font-medium mb-1"
               >
                 Full Name <span className="ml-1 text-red-700">*</span>
               </label>
@@ -161,7 +177,10 @@ const InterviewApplicationForm: React.FC = () => {
                 required
               />
 
-              <label htmlFor="email" className="block text-sm font-medium mb-1">
+              <label
+                htmlFor="email"
+                className="block text-white text-sm font-medium mb-1"
+              >
                 Email <span className="ml-1 text-red-700">*</span>
               </label>
               <input
@@ -177,9 +196,9 @@ const InterviewApplicationForm: React.FC = () => {
 
               <label
                 htmlFor="password"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm   text-white font-medium mb-1"
               >
-                Password <span className="ml-1 text-red-700">*</span>
+                Password <span className="ml-1  text-red-700">*</span>
               </label>
               <input
                 type="password"
@@ -192,7 +211,10 @@ const InterviewApplicationForm: React.FC = () => {
                 required
               />
 
-              <label htmlFor="phone" className="block text-sm font-medium mb-1">
+              <label
+                htmlFor="phone"
+                className="block   text-white text-sm font-medium mb-1"
+              >
                 Phone Number <span className="ml-1 text-red-700">*</span>
               </label>
               <input
@@ -208,7 +230,10 @@ const InterviewApplicationForm: React.FC = () => {
                 required
               />
               <div className="mb-3">
-                <label htmlFor="dob" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="dob"
+                  className="block text-white text-sm font-medium mb-1"
+                >
                   Date of Birth
                 </label>
                 <input
@@ -230,7 +255,7 @@ const InterviewApplicationForm: React.FC = () => {
 
               <label
                 htmlFor="gender"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm text-white font-medium mb-1"
               >
                 Gender <span className="ml-1 text-red-700">*</span>
               </label>
@@ -250,7 +275,7 @@ const InterviewApplicationForm: React.FC = () => {
 
               <label
                 htmlFor="address"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm text-white font-medium mb-1"
               >
                 Address
               </label>
@@ -266,7 +291,7 @@ const InterviewApplicationForm: React.FC = () => {
 
               <label
                 htmlFor="maritalStatus"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm text-white font-medium mb-1"
               >
                 Marital Status
               </label>
@@ -287,7 +312,7 @@ const InterviewApplicationForm: React.FC = () => {
 
               <label
                 htmlFor="nationality"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm  text-white font-medium mb-1"
               >
                 Nationality <span className="ml-1 text-red-700">*</span>
               </label>
@@ -321,7 +346,7 @@ const InterviewApplicationForm: React.FC = () => {
             <div>
               <label
                 htmlFor="highestQualification"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm text-white font-medium mb-1"
               >
                 Highest Qualification
               </label>
@@ -337,7 +362,7 @@ const InterviewApplicationForm: React.FC = () => {
 
               <label
                 htmlFor="university"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm text-white font-medium mb-1"
               >
                 University/College Name
               </label>
@@ -353,7 +378,7 @@ const InterviewApplicationForm: React.FC = () => {
 
               <label
                 htmlFor="passingYear"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm text-white font-medium mb-1"
               >
                 Passing Year <span className="ml-1 text-red-700">*</span>
               </label>
@@ -369,7 +394,7 @@ const InterviewApplicationForm: React.FC = () => {
 
               <label
                 htmlFor="percentage"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm text-white font-medium mb-1"
               >
                 Percentage/CGPA <span className="ml-1 text-red-700">*</span>
               </label>
@@ -391,7 +416,7 @@ const InterviewApplicationForm: React.FC = () => {
 
               <label
                 htmlFor="certifications"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm text-white font-medium mb-1"
               >
                 Additional Certifications
               </label>
@@ -408,7 +433,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="flex justify-between">
                 <button
                   onClick={prevStep}
-                  className="mr-2 py-2 px-4 bg-gray-200 rounded"
+                  className="mr-2 py-2 px-4 text-white bg-gray-200 rounded"
                 >
                   Back
                 </button>
@@ -427,7 +452,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="companyName"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Current/Last Company Name
                 </label>
@@ -445,7 +470,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="jobTitle"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Job Title/Designation
                 </label>
@@ -463,7 +488,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="jobDuration"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Duration (From - To)
                 </label>
@@ -481,7 +506,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="responsibilities"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm  text-white font-medium mb-1"
                 >
                   Key Responsibilities
                 </label>
@@ -498,7 +523,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="skillsLearned"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Skills Learned
                 </label>
@@ -515,7 +540,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="flex justify-between">
                 <button
                   onClick={prevStep}
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Back
                 </button>
@@ -534,7 +559,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="technicalSkills"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Technical Skills
                 </label>
@@ -552,7 +577,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="softSkills"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm  text-white font-medium mb-1"
                 >
                   Soft Skills
                 </label>
@@ -570,7 +595,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="achievements"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Achievements
                 </label>
@@ -587,7 +612,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="languagesSpoken"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm  text-white font-medium mb-1"
                 >
                   Languages Spoken
                 </label>
@@ -606,7 +631,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="flex justify-between">
                 <button
                   onClick={prevStep}
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Back
                 </button>
@@ -625,7 +650,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="fatherName"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Father Name
                 </label>
@@ -643,7 +668,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="motherName"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Mohers Name
                 </label>
@@ -661,7 +686,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="siblings"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Number of Silings
                 </label>
@@ -684,7 +709,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="flex justify-between">
                 <button
                   onClick={prevStep}
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm text-white font-medium mb-1"
                 >
                   Back
                 </button>
@@ -706,7 +731,9 @@ const InterviewApplicationForm: React.FC = () => {
                   className="w-full flex flex-col items-center p-3 mb-3 border-2 border-dashed rounded-lg cursor-pointer"
                 >
                   <FiUpload size={24} className="mb-2" />
-                  <span className="text-sm">Upload Profile Image</span>
+                  <span className="text-sm text-white">
+                    Upload Profile Image
+                  </span>
                 </label>
                 <input
                   type="file"
@@ -715,6 +742,22 @@ const InterviewApplicationForm: React.FC = () => {
                   accept="audio/mp3, video/mp4"
                   onChange={(e) => handleFileChange("profileImage", e)}
                 />
+
+                {filePreview && (
+                  <div className="mt-3">
+                    {fileType === "audio" ? (
+                      <audio controls className="w-full">
+                        <source src={filePreview} type="audio/mp3" />
+                        Your browser does not support the audio element.
+                      </audio>
+                    ) : fileType === "video" ? (
+                      <video controls className="w-full h-72">
+                        <source src={filePreview} type="video/mp4" />
+                        Your browser does not support the video element.
+                      </video>
+                    ) : null}
+                  </div>
+                )}
               </div>
 
               <div className="mb-3">
@@ -723,7 +766,9 @@ const InterviewApplicationForm: React.FC = () => {
                   className="w-full flex flex-col items-center p-3 mb-3 border-2 border-dashed rounded-lg cursor-pointer"
                 >
                   <FiUpload size={24} className="mb-2" />
-                  <span className="text-sm">Upload Resume (PDF)</span>
+                  <span className="text-sm text-white">
+                    Upload Resume (PDF)
+                  </span>
                 </label>
                 <input
                   type="file"
@@ -745,7 +790,9 @@ const InterviewApplicationForm: React.FC = () => {
                   className="w-full flex flex-col items-center p-3 mb-3 border-2 border-dashed rounded-lg cursor-pointer"
                 >
                   <FiUpload size={24} className="mb-2" />
-                  <span className="text-sm">Upload Additional Documents</span>
+                  <span className="text-sm text-white">
+                    Upload Additional Documents
+                  </span>
                 </label>
                 <input
                   type="file"
@@ -756,7 +803,7 @@ const InterviewApplicationForm: React.FC = () => {
                 {formData.additionalDocs && (
                   <div className="text-center mt-2">
                     <p className="text-sm">{formData.additionalDocs.name}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-white">
                       Additional Document Preview
                     </p>
                   </div>
