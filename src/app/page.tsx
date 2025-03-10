@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FiUpload } from "react-icons/fi";
 
 const steps = [
@@ -69,13 +69,45 @@ const InterviewApplicationForm: React.FC = () => {
   const prevStep = () => setStep((prev) => prev - 1);
 
   const handleSubmit = () => {
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      password: "",
+      dob: "",
+      gender: "",
+      address: "",
+      maritalStatus: "",
+      nationality: "",
+      highestQualification: "",
+      university: "",
+      passingYear: "",
+      percentage: "",
+      certifications: "",
+      companyName: "",
+      jobTitle: "",
+      jobDuration: "",
+      responsibilities: "",
+      skillsLearned: "",
+      technicalSkills: "",
+      softSkills: "",
+      achievements: "",
+      languagesSpoken: "",
+      fatherName: "",
+      motherName: "",
+      siblings: "",
+      profileImage: null as File | null,
+      resume: null as File | null,
+      additionalDocs: null as File | null,
+    });
+    setStep(1);
     setShowPopup(true);
   };
 
   return (
     <div className="flex flex-col justify-start pt-20 items-center bg-gradient-to-r from-purple-600 to-blue-500 min-h-screen">
       <h2 className="text-3xl font-bold text-white text-center mb-20">
-        Interview Application
+        Detail Form
       </h2>
       <div className="w-[50%]">
         <div className="flex mb-4">
@@ -94,16 +126,14 @@ const InterviewApplicationForm: React.FC = () => {
           ))}
         </div>
 
-        <div className="bg-white bg-opacity-20 backdrop-blur-lg p-10 rounded-lg shadow-lg w-full">
-          {/* Personal Information */}
+        <div className="bg-white bg-opacity-20 backdrop-blur-lg   p-10 rounded-lg shadow-lg w-full">
           {step === 1 && (
             <div>
-              {/* Full Name */}
               <label
                 htmlFor="fullName"
                 className="block text-sm font-medium mb-1"
               >
-                Full Name
+                Full Name <span className="ml-1 text-red-700">*</span>
               </label>
               <input
                 type="text"
@@ -115,9 +145,9 @@ const InterviewApplicationForm: React.FC = () => {
                 onChange={handleChange}
                 required
               />
-              {/* Email */}
+
               <label htmlFor="email" className="block text-sm font-medium mb-1">
-                Email
+                Email <span className="ml-1 text-red-700">*</span>
               </label>
               <input
                 type="email"
@@ -129,12 +159,12 @@ const InterviewApplicationForm: React.FC = () => {
                 onChange={handleChange}
                 required
               />
-              {/* Password */}
+
               <label
                 htmlFor="password"
                 className="block text-sm font-medium mb-1"
               >
-                Password
+                Password <span className="ml-1 text-red-700">*</span>
               </label>
               <input
                 type="password"
@@ -146,9 +176,9 @@ const InterviewApplicationForm: React.FC = () => {
                 onChange={handleChange}
                 required
               />
-              {/* Phone Number */}
+
               <label htmlFor="phone" className="block text-sm font-medium mb-1">
-                Phone Number
+                Phone Number <span className="ml-1 text-red-700">*</span>
               </label>
               <input
                 type="text"
@@ -183,12 +213,11 @@ const InterviewApplicationForm: React.FC = () => {
                 />
               </div>
 
-              {/* Gender */}
               <label
                 htmlFor="gender"
                 className="block text-sm font-medium mb-1"
               >
-                Gender
+                Gender <span className="ml-1 text-red-700">*</span>
               </label>
               <select
                 name="gender"
@@ -203,7 +232,7 @@ const InterviewApplicationForm: React.FC = () => {
                 <option value="female">Female</option>
                 <option value="other">Other</option>
               </select>
-              {/* Address */}
+
               <label
                 htmlFor="address"
                 className="block text-sm font-medium mb-1"
@@ -219,7 +248,7 @@ const InterviewApplicationForm: React.FC = () => {
                 onChange={handleChange}
                 value={formData?.address}
               />
-              {/* Marital Status */}
+
               <label
                 htmlFor="maritalStatus"
                 className="block text-sm font-medium mb-1"
@@ -240,12 +269,12 @@ const InterviewApplicationForm: React.FC = () => {
                 <option value="female">2</option>
                 <option value="other">Other</option>
               </select>
-              {/* Nationality */}
+
               <label
                 htmlFor="nationality"
                 className="block text-sm font-medium mb-1"
               >
-                Nationality
+                Nationality <span className="ml-1 text-red-700">*</span>
               </label>
               <select
                 name="nationality"
@@ -267,13 +296,12 @@ const InterviewApplicationForm: React.FC = () => {
                 <option value="Russian">Russian</option>
                 <option value="South African">South African</option>
                 <option value="Mexican">Mexican</option>
-                {/* Add other countries here, but excluding "Indian" */}
               </select>
 
               <div className="flex justify-end">
                 <button
                   onClick={nextStep}
-                  className="py-2 px-4 bg-white text-gray-800 rounded"
+                  className="py-2 px-4 bg-gray-200 text-gray-800 rounded"
                 >
                   Next
                 </button>
@@ -281,10 +309,8 @@ const InterviewApplicationForm: React.FC = () => {
             </div>
           )}
 
-          {/* Educational Details */}
           {step === 2 && (
             <div>
-              {/* Highest Qualification */}
               <label
                 htmlFor="highestQualification"
                 className="block text-sm font-medium mb-1"
@@ -296,12 +322,11 @@ const InterviewApplicationForm: React.FC = () => {
                 name="highestQualification"
                 id="highestQualification"
                 placeholder="Highest Qualification"
-                value={formData.highestQualification} // Bind value to formData
+                value={formData.highestQualification}
                 className="w-full p-3 mb-3 border rounded-lg"
                 onChange={handleChange}
               />
 
-              {/* University/College Name */}
               <label
                 htmlFor="university"
                 className="block text-sm font-medium mb-1"
@@ -313,52 +338,49 @@ const InterviewApplicationForm: React.FC = () => {
                 name="university"
                 id="university"
                 placeholder="University/College Name"
-                value={formData.university} // Bind value to formData
+                value={formData.university}
                 className="w-full p-3 mb-3 border rounded-lg"
                 onChange={handleChange}
               />
 
-              {/* Passing Year */}
               <label
                 htmlFor="passingYear"
                 className="block text-sm font-medium mb-1"
               >
-                Passing Year
+                Passing Year <span className="ml-1 text-red-700">*</span>
               </label>
               <input
                 type="text"
                 name="passingYear"
                 id="passingYear"
                 placeholder="Passing Year"
-                value={formData.passingYear} // Bind value to formData
+                value={formData.passingYear}
                 className="w-full p-3 mb-3 border rounded-lg"
                 onChange={handleChange}
               />
 
-              {/* Percentage/CGPA */}
               <label
                 htmlFor="percentage"
                 className="block text-sm font-medium mb-1"
               >
-                Percentage/CGPA
+                Percentage/CGPA <span className="ml-1 text-red-700">*</span>
               </label>
               <input
                 type="text"
                 name="percentage"
                 id="percentage"
                 placeholder="Percentage/CGPA"
-                value={formData.percentage} // Bind value to formData
+                value={formData.percentage}
                 className="w-full p-3 mb-3 border rounded-lg"
+                required
                 onChange={(e) => {
-                  // Allow only letters (alphabetical characters)
                   const value = e.target.value;
                   if (/^[A-Za-z\s]*$/.test(value)) {
-                    handleChange(e); // Update the state only if the value is valid
+                    handleChange(e);
                   }
                 }}
               />
 
-              {/* Additional Certifications */}
               <label
                 htmlFor="certifications"
                 className="block text-sm font-medium mb-1"
@@ -370,7 +392,7 @@ const InterviewApplicationForm: React.FC = () => {
                 name="certifications"
                 id="certifications"
                 placeholder="Additional Certifications"
-                value={formData.certifications} // Bind value to formData
+                value={formData.certifications}
                 className="w-full p-3 mb-3 border rounded-lg"
                 onChange={handleChange}
               />
@@ -384,7 +406,7 @@ const InterviewApplicationForm: React.FC = () => {
                 </button>
                 <button
                   onClick={nextStep}
-                  className="py-2 px-4 bg-white text-gray-800 rounded"
+                  className="py-2 px-4 bg-gray-200 text-gray-800 rounded"
                 >
                   Next
                 </button>
@@ -392,7 +414,6 @@ const InterviewApplicationForm: React.FC = () => {
             </div>
           )}
 
-          {/* Work Experience */}
           {step === 3 && (
             <div>
               <div className="mb-3">
@@ -408,7 +429,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="companyName"
                   placeholder="Current/Last Company Name"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.companyName} // Bind to state
+                  value={formData.companyName}
                   onChange={handleChange}
                 />
               </div>
@@ -426,7 +447,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="jobTitle"
                   placeholder="Current/Last Company Name"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.jobTitle} // Bind to state
+                  value={formData.jobTitle}
                   onChange={handleChange}
                 />
               </div>
@@ -444,7 +465,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="jobDuration"
                   placeholder="Duration (From - To)"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.jobDuration} // Bind to state
+                  value={formData.jobDuration}
                   onChange={handleChange}
                 />
               </div>
@@ -461,7 +482,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="responsibilities"
                   placeholder="Key Responsibilities"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.responsibilities} // Bind to state
+                  value={formData.responsibilities}
                   onChange={handleChange}
                 />
               </div>
@@ -478,7 +499,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="skillsLearned"
                   placeholder="Skills Learned"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.skillsLearned} // Bind to state
+                  value={formData.skillsLearned}
                   onChange={handleChange}
                 />
               </div>
@@ -492,7 +513,7 @@ const InterviewApplicationForm: React.FC = () => {
                 </button>
                 <button
                   onClick={nextStep}
-                  className="py-2 px-4 bg-white text-gray-800 rounded"
+                  className="py-2 px-4 bg-gray-200 text-gray-800 rounded"
                 >
                   Next
                 </button>
@@ -500,7 +521,6 @@ const InterviewApplicationForm: React.FC = () => {
             </div>
           )}
 
-          {/* Skills & Achievements */}
           {step === 4 && (
             <div>
               <div className="mb-3">
@@ -516,7 +536,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="technicalSkills"
                   placeholder="Technical Skills"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.technicalSkills} // Bind to state
+                  value={formData.technicalSkills}
                   onChange={handleChange}
                 />
               </div>
@@ -534,7 +554,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="softSkills"
                   placeholder="Soft Skills"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.softSkills} // Bind to state
+                  value={formData.softSkills}
                   onChange={handleChange}
                 />
               </div>
@@ -551,7 +571,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="achievements"
                   placeholder="Key Responsibilities"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.achievements} // Bind to state
+                  value={formData.achievements}
                   onChange={handleChange}
                 />
               </div>
@@ -567,7 +587,7 @@ const InterviewApplicationForm: React.FC = () => {
                   id="languagesSpoken"
                   name="languagesSpoken"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.languagesSpoken} // Bind to state
+                  value={formData.languagesSpoken}
                   onChange={handleChange}
                 >
                   <option value="">Select a Language</option>
@@ -584,7 +604,7 @@ const InterviewApplicationForm: React.FC = () => {
                 </button>
                 <button
                   onClick={nextStep}
-                  className="py-2 px-4 bg-white text-gray-800 rounded"
+                  className="py-2 px-4 bg-gray-200 text-gray-800 rounded"
                 >
                   Next
                 </button>
@@ -592,7 +612,6 @@ const InterviewApplicationForm: React.FC = () => {
             </div>
           )}
 
-          {/* Family Details */}
           {step === 5 && (
             <div>
               <div className="mb-3">
@@ -608,7 +627,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="fatherName"
                   placeholder="Father's Name"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.fatherName} // Bind to state
+                  value={formData.fatherName}
                   onChange={handleChange}
                 />
               </div>
@@ -626,7 +645,7 @@ const InterviewApplicationForm: React.FC = () => {
                   name="motherName"
                   placeholder="Father's Name"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.motherName} // Bind to state
+                  value={formData.motherName}
                   onChange={handleChange}
                 />
               </div>
@@ -644,12 +663,11 @@ const InterviewApplicationForm: React.FC = () => {
                   name="siblings"
                   placeholder="Number of Siblings"
                   className="w-full p-3 mt-1 border rounded-lg"
-                  value={formData.siblings} // Bind to state
+                  value={formData.siblings}
                   onChange={(e) => {
-                    // Allow only letters (alphabetical characters)
                     const value = e.target.value;
                     if (/^[A-Za-z\s]*$/.test(value)) {
-                      handleChange(e); // Update the state only if the value is valid
+                      handleChange(e);
                     }
                   }}
                 />
@@ -664,7 +682,7 @@ const InterviewApplicationForm: React.FC = () => {
                 </button>
                 <button
                   onClick={nextStep}
-                  className="py-2 px-4 bg-white text-gray-800 rounded"
+                  className="py-2 px-4 bg-gray-200 text-gray-800 rounded"
                 >
                   Next
                 </button>
@@ -672,10 +690,8 @@ const InterviewApplicationForm: React.FC = () => {
             </div>
           )}
 
-          {/* Upload Documents */}
           {step === 6 && (
             <div>
-              {/* Profile Image Upload and Preview */}
               <div className="mb-3">
                 <label
                   htmlFor="profileImage"
@@ -693,7 +709,6 @@ const InterviewApplicationForm: React.FC = () => {
                 />
               </div>
 
-              {/* Resume Upload and Preview */}
               <div className="mb-3">
                 <label
                   htmlFor="resume"
@@ -716,7 +731,6 @@ const InterviewApplicationForm: React.FC = () => {
                 )}
               </div>
 
-              {/* Additional Documents Upload and Preview */}
               <div className="mb-3">
                 <label
                   htmlFor="additionalDocs"
@@ -749,7 +763,7 @@ const InterviewApplicationForm: React.FC = () => {
                   Back
                 </button>
                 <button
-                  className="py-2 px-4 bg-white text-gray-800 rounded"
+                  className="py-2 px-4 bg-gray-200 text-gray-800 rounded"
                   onClick={handleSubmit}
                 >
                   Submit
