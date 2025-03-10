@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
 
@@ -14,7 +15,7 @@ const steps = [
 
 const InterviewApplicationForm: React.FC = () => {
   const [step, setStep] = useState(1);
-  const [showPopup, setShowPopup] = useState<Boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -600,7 +601,7 @@ const InterviewApplicationForm: React.FC = () => {
                   htmlFor="fatherName"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Father's Name
+                  Father Name
                 </label>
                 <input
                   type="text"
@@ -618,7 +619,7 @@ const InterviewApplicationForm: React.FC = () => {
                   htmlFor="motherName"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Moher's Name
+                  Mohers Name
                 </label>
                 <input
                   type="text"
@@ -693,7 +694,7 @@ const InterviewApplicationForm: React.FC = () => {
                 />
                 {formData.profileImage && (
                   <div className="w-full text-center mt-2">
-                    <img
+                    <Image
                       src={URL.createObjectURL(formData.profileImage)}
                       alt="Profile Preview"
                       className="w-24 h-24 object-cover rounded-full mx-auto"
