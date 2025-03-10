@@ -1,7 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { FiUpload } from "react-icons/fi";
+import useCountryList from "react-select-country-list";
+
+type Country = {
+  value: string;
+  label: string;
+};
 
 const steps = [
   "Personal Information",
@@ -56,6 +62,15 @@ const InterviewApplicationForm: React.FC = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const countryList = useCountryList();
+
+  const countries: Country[] = countryList.getData();
+
+  const filteredCountries = useMemo(
+    () => countries.filter((country) => country.label !== "India"),
+    [countries]
+  );
 
   const handleFileChange = (
     name: string,
@@ -188,8 +203,8 @@ const InterviewApplicationForm: React.FC = () => {
                 value={formData?.phone}
                 className="w-full p-3 mb-3 border rounded-lg"
                 onChange={handleChange}
-                pattern="^\d{7}$"
-                maxLength={7}
+                pattern="^\d{11}$"
+                maxLength={11}
                 required
               />
               <div className="mb-3">
@@ -277,25 +292,18 @@ const InterviewApplicationForm: React.FC = () => {
                 Nationality <span className="ml-1 text-red-700">*</span>
               </label>
               <select
-                name="nationality"
                 id="nationality"
-                value={formData?.nationality}
-                className="w-full p-3 mb-3 border rounded-lg"
+                name="nationality"
                 onChange={handleChange}
+                value={formData.nationality}
+                className="w-full p-3 mb-3 border rounded-lg"
               >
                 <option value="">Select Nationality</option>
-                <option value="American">American</option>
-                <option value="British">British</option>
-                <option value="Canadian">Canadian</option>
-                <option value="Australian">Australian</option>
-                <option value="German">German</option>
-                <option value="French">French</option>
-                <option value="Brazilian">Brazilian</option>
-                <option value="Chinese">Chinese</option>
-                <option value="Japanese">Japanese</option>
-                <option value="Russian">Russian</option>
-                <option value="South African">South African</option>
-                <option value="Mexican">Mexican</option>
+                {filteredCountries.map((country: Country) => (
+                  <option key={country.value} value={country.value}>
+                    {country.label}
+                  </option>
+                ))}
               </select>
 
               <div className="flex justify-end">
