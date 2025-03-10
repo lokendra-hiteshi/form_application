@@ -419,7 +419,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="companyName"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Current/Last Company Name
                 </label>
@@ -437,7 +437,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="jobTitle"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Job Title/Designation
                 </label>
@@ -455,7 +455,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="jobDuration"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Duration (From - To)
                 </label>
@@ -473,7 +473,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="responsibilities"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Key Responsibilities
                 </label>
@@ -490,7 +490,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="skillsLearned"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Skills Learned
                 </label>
@@ -507,7 +507,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="flex justify-between">
                 <button
                   onClick={prevStep}
-                  className="mr-2 py-2 px-4 bg-gray-200 rounded"
+                  className="block text-sm font-medium mb-1"
                 >
                   Back
                 </button>
@@ -526,7 +526,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="technicalSkills"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Technical Skills
                 </label>
@@ -544,7 +544,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="softSkills"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Soft Skills
                 </label>
@@ -562,7 +562,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="achievements"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Achievements
                 </label>
@@ -579,7 +579,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="languagesSpoken"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Languages Spoken
                 </label>
@@ -598,7 +598,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="flex justify-between">
                 <button
                   onClick={prevStep}
-                  className="mr-2 py-2 px-4 bg-gray-200 rounded"
+                  className="block text-sm font-medium mb-1"
                 >
                   Back
                 </button>
@@ -617,7 +617,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="fatherName"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Father Name
                 </label>
@@ -635,7 +635,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="motherName"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Mohers Name
                 </label>
@@ -653,7 +653,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="mb-3">
                 <label
                   htmlFor="siblings"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium mb-1"
                 >
                   Number of Silings
                 </label>
@@ -676,7 +676,7 @@ const InterviewApplicationForm: React.FC = () => {
               <div className="flex justify-between">
                 <button
                   onClick={prevStep}
-                  className="mr-2 py-2 px-4 bg-gray-200 rounded"
+                  className="block text-sm font-medium mb-1"
                 >
                   Back
                 </button>
